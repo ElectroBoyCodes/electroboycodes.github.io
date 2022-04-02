@@ -1,0 +1,31 @@
+body{
+    background: rgb(66,121,9);
+    background: linear-gradient(90deg, rgba(66,121,9,1) 4%, rgba(9,117,121,1) 14%, rgba(121,9,85,1) 20%, rgba(96,95,60,1) 29%, rgba(9,105,106,0.9107842966288078) 37%, rgba(9,9,121,1) 49%, rgba(147,7,7,1) 59%, rgba(36,20,0,1) 78%, rgba(0,212,255,1) 100%);    
+}
+
+.heading{
+    width: 100%;
+    margin: 0px;
+    font-size: 23px;
+}
+
+#start, #number_of_objects,#status{
+    font-size: 18px;
+}
+
+canvas{
+    border-radius: 10px;
+    border: 2px solid white;
+    margin-top: 130px;
+    box-shadow: 5px 5px 5px white;
+}
+
+.copy_right_footer{
+    line-height: 3;
+    position: fixed;
+    width: 100%;
+    background-color:black;
+    color:white;
+    bottom: 0;
+    text-align: center;
+}
