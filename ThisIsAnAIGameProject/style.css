@@ -20,3 +20,25 @@
 #start, #status {
     font-size: 22px;
 }
+
+#copywrite {
+    background-color: #ffffffff;
+    line-height: 2;
+    margin: 0;
+}
+
+.modal-dialog {
+    width: 90%;
+}
+
+.instruction_image {
+    display: inline-block;
+    width: 45%;
+}
+
+video {
+    background: url("game_console.png");
+    background-size: cover;
+    background-position: center;
+    padding: 25px;
+}
