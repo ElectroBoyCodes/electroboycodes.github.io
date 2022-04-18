@@ -12,7 +12,7 @@ var paddle1Y;
 var  playerscore =0;
 var audio1;
 var pcscore =0;
-var video, canvas, noseX, noseY;
+var video, canvas;
 //ball x and y and speedx speed y and radius
 var ball = {
     x:350/2,
@@ -22,13 +22,14 @@ var ball = {
     dy:3
 }
 
-var start = false;
+var start = false, canvas;
+
+var hand = 0, missSound;
 
 function stargt() {
   loop();
   start= true;
   document.getElementById("start").style.display = "none";
-  // canvas.show();
   canvas.parent('canvas');
 
 	video = createCapture(VIDEO);
@@ -37,15 +38,15 @@ function stargt() {
 	ml5.poseNet(video, () => console.log("model loaded")).on('pose', (results) => {
 		console.log(results);
 		if(results.length > 0) {
-			noseX = results[0].pose.nose.x;
-			noseY = results[0].pose.nose.y;
+			hand = results[0].pose.leftWrist.x;
+      circle(results[0].pose.leftWrist.x, results[0].pose.leftWrist.y, 80);
 		}
 	});
 }
 
 function setup(){
-  var canvas =  createCanvas(700,600);
-	// canvas.hide();
+  canvas =  createCanvas(700,600);
+  missSound = loadSound("missed.wav");
 }
 
 
@@ -69,7 +70,7 @@ function draw(){
     fill(250,0,0);
      stroke(0,0,250);
      strokeWeight(0.5);
-    paddle1Y = mouseY; 
+    paddle1Y = hand; 
     rect(paddle1X,paddle1Y,paddle1,paddle1Height,100);
     
     
@@ -144,6 +145,7 @@ function move(){
     ball.dx = -ball.dx+0.5; 
   }
   else{
+    missSound.play();
     pcscore++;
     reset();
     navigator.vibrate(100);
@@ -181,10 +183,8 @@ function models(){
 
 //this function help to not go te paddle out of canvas
 function paddleInCanvas(){
-  if(mouseY+paddle1Height > height){
-    mouseY=height-paddle1Height;
-  }
-  if(mouseY < 0){
-    mouseY =0;
-  }  
+  if(hand+paddle1Height > height)
+    hand=height-paddle1Height;
+  if(hand < 0)
+    hand =0;
 }
